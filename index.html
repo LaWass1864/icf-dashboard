@@ -1,0 +1,524 @@
+!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portail du Locataire - Tableau de Bord & Maintenance</title>
+    <!-- Tailwind CSS pour un design moderne, propre et accessible -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
+
+    <!-- En-tête / Barre de navigation supérieure -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Logo & Nom -->
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white font-bold p-2 rounded-lg flex items-center justify-center w-10 h-10 shadow-sm">
+                    PL
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-slate-900">Portail du Locataire</span>
+                    <span class="block text-xs text-slate-500">Résidence Les Lilas - Logement 89</span>
+                </div>
+            </div>
+
+            <!-- Navigation Principale (Desktop) -->
+            <nav class="hidden md:flex items-center space-x-1">
+                <a href="#" class="px-3 py-2 rounded-lg text-sm font-medium bg-blue-50 text-blue-700 transition">Tableau de bord</a>
+                <a href="#maintenance" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition">Maintenance</a>
+                <a href="#paiements" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition">Paiements</a>
+                <a href="#documents" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition">Documents</a>
+            </nav>
+
+            <!-- Profil Utilisateur -->
+            <div class="flex items-center space-x-3">
+                <button class="relative p-2 text-slate-600 hover:text-slate-900 rounded-full hover:bg-slate-100 transition" aria-label="Notifications">
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                </button>
+                <div class="flex items-center space-x-2 border-l border-slate-200 pl-3">
+                    <div class="w-9 h-9 rounded-full bg-blue-100 text-blue-700 font-semibold flex items-center justify-center text-sm">
+                        WA
+                    </div>
+                    <div class="hidden sm:block text-left">
+                        <p class="text-sm font-medium text-slate-900">Wassila Amoura</p>
+                        <p class="text-xs text-slate-500">Locataire titulaire</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenu Principal -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8">
+
+        <!-- En-tête de page -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">Tableau de bord de maintenance</h1>
+                <p class="text-sm text-slate-600 mt-1">Suivez l'état de vos signalements, l'historique des interventions et gérez vos réclamations en toute transparence.</p>
+            </div>
+            <button onclick="openNewTicketModal()" class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-sm transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Nouveau signalement
+            </button>
+        </div>
+
+        <!-- Cartes de Métriques -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Carte 1 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Tickets Actifs</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">4</p>
+                    <p class="text-xs text-amber-600 font-medium mt-1">1 En cours • 1 Planifié</p>
+                </div>
+                <div class="p-3 bg-amber-50 text-amber-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+            </div>
+
+            <!-- Carte 2 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Chauffage & Isolation</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">1</p>
+                    <p class="text-xs text-blue-600 font-medium mt-1">Diagnostic en cours</p>
+                </div>
+                <div class="p-3 bg-blue-50 text-blue-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+            </div>
+
+            <!-- Carte 3 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Clôturés / Résolus</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">12</p>
+                    <p class="text-xs text-emerald-600 font-medium mt-1">Conformes cette année</p>
+                </div>
+                <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+            </div>
+
+            <!-- Carte 4 -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex items-center justify-between">
+                <div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Amicale & Locataires</p>
+                    <p class="text-3xl font-bold text-slate-900 mt-1">Active</p>
+                    <p class="text-xs text-purple-600 font-medium mt-1">Prochaine réunion le 5 Nov</p>
+                </div>
+                <div class="p-3 bg-purple-50 text-purple-600 rounded-xl">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 4 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Tableau des Demandes & Détails -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Tableau Principal (2 colonnes) -->
+            <div class="lg:col-span-2 bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
+                <!-- Filtres et Titre de section -->
+                <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <h2 class="text-lg font-bold text-slate-900">Demandes de maintenance</h2>
+                    
+                    <!-- Boutons de filtres par statut -->
+                    <div class="flex items-center space-x-1 bg-slate-100 p-1 rounded-xl text-xs font-medium">
+                        <button onclick="filterTable('all')" id="btn-all" class="px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-xs transition">Tous</button>
+                        <button onclick="filterTable('en-cours')" id="btn-en-cours" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">En cours</button>
+                        <button onclick="filterTable('planifie')" id="btn-planifie" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">Planifié</button>
+                        <button onclick="filterTable('termine')" id="btn-termine" class="px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition">Terminés</button>
+                    </div>
+                </div>
+
+                <!-- Tableau HTML Responsive -->
+                <div class="overflow-x-auto flex-1">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold border-b border-slate-200">
+                                <th class="py-3 px-6">Réf. Ticket</th>
+                                <th class="py-3 px-6">Objet</th>
+                                <th class="py-3 px-6">Date</th>
+                                <th class="py-3 px-6">Statut</th>
+                                <th class="py-3 px-6 text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm text-slate-700" id="tickets-table-body">
+                            <!-- Ligne 1 -->
+                            <tr class="hover:bg-slate-50/80 cursor-pointer transition active" onclick="selectTicket('TKT-001')">
+                                <td class="py-4 px-6 font-mono font-semibold text-blue-600">#TKT-001</td>
+                                <td class="py-4 px-6 font-medium text-slate-900">Radiateur défectueux (Hall 89)</td>
+                                <td class="py-4 px-6 text-slate-500">28 Oct 2026</td>
+                                <td class="py-4 px-6" data-status="en-cours">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                                        <span class="w-1.5 h-1.5 mr-1.5 bg-amber-500 rounded-full animate-pulse"></span> En cours
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-right space-x-2">
+                                    <button onclick="event.stopPropagation(); selectTicket('TKT-001')" class="text-blue-600 hover:text-blue-800 font-medium text-xs bg-blue-50 px-3 py-1.5 rounded-lg">Détails</button>
+                                    <button onclick="event.stopPropagation(); exportPDF('TKT-001')" class="text-slate-600 hover:text-slate-900 font-medium text-xs bg-slate-100 px-3 py-1.5 rounded-lg">PDF</button>
+                                </td>
+                            </tr>
+                            <!-- Ligne 2 -->
+                            <tr class="hover:bg-slate-50/80 cursor-pointer transition" onclick="selectTicket('TKT-002')">
+                                <td class="py-4 px-6 font-mono font-semibold text-blue-600">#TKT-002</td>
+                                <td class="py-4 px-6 font-medium text-slate-900">Problème d'éclairage cage d'escalier</td>
+                                <td class="py-4 px-6 text-slate-500">22 Oct 2026</td>
+                                <td class="py-4 px-6" data-status="planifie">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200">
+                                        <span class="w-1.5 h-1.5 mr-1.5 bg-blue-500 rounded-full"></span> Planifié
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-right space-x-2">
+                                    <button onclick="event.stopPropagation(); selectTicket('TKT-002')" class="text-blue-600 hover:text-blue-800 font-medium text-xs bg-blue-50 px-3 py-1.5 rounded-lg">Détails</button>
+                                    <button onclick="event.stopPropagation(); exportPDF('TKT-002')" class="text-slate-600 hover:text-slate-900 font-medium text-xs bg-slate-100 px-3 py-1.5 rounded-lg">PDF</button>
+                                </td>
+                            </tr>
+                            <!-- Ligne 3 -->
+                            <tr class="hover:bg-slate-50/80 cursor-pointer transition" onclick="selectTicket('TKT-003')">
+                                <td class="py-4 px-6 font-mono font-semibold text-blue-600">#TKT-003</td>
+                                <td class="py-4 px-6 font-medium text-slate-900">Interphone / Contrôle d'accès défectueux</td>
+                                <td class="py-4 px-6 text-slate-500">15 Sept 2026</td>
+                                <td class="py-4 px-6" data-status="termine">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-500 rounded-full"></span> Terminé
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-right space-x-2">
+                                    <button onclick="event.stopPropagation(); selectTicket('TKT-003')" class="text-blue-600 hover:text-blue-800 font-medium text-xs bg-blue-50 px-3 py-1.5 rounded-lg">Détails</button>
+                                    <button onclick="event.stopPropagation(); exportPDF('TKT-003')" class="text-slate-600 hover:text-slate-900 font-medium text-xs bg-slate-100 px-3 py-1.5 rounded-lg">PDF</button>
+                                </td>
+                            </tr>
+                            <!-- Ligne 4 -->
+                            <tr class="hover:bg-slate-50/80 cursor-pointer transition" onclick="selectTicket('TKT-004')">
+                                <td class="py-4 px-6 font-mono font-semibold text-blue-600">#TKT-004</td>
+                                <td class="py-4 px-6 font-medium text-slate-900">Fuite sur canalisation cave</td>
+                                <td class="py-4 px-6 text-slate-500">04 Avr 2026</td>
+                                <td class="py-4 px-6" data-status="termine">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        <span class="w-1.5 h-1.5 mr-1.5 bg-emerald-500 rounded-full"></span> Terminé
+                                    </span>
+                                </td>
+                                <td class="py-4 px-6 text-right space-x-2">
+                                    <button onclick="event.stopPropagation(); selectTicket('TKT-004')" class="text-blue-600 hover:text-blue-800 font-medium text-xs bg-blue-50 px-3 py-1.5 rounded-lg">Détails</button>
+                                    <button onclick="event.stopPropagation(); exportPDF('TKT-004')" class="text-slate-600 hover:text-slate-900 font-medium text-xs bg-slate-100 px-3 py-1.5 rounded-lg">PDF</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Détails du Ticket & Historique Chronologique (1 colonne) -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                        <div>
+                            <span class="text-xs font-mono font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md" id="detail-id">#TKT-001</span>
+                            <h3 class="text-lg font-bold text-slate-900 mt-1" id="detail-title">Radiateur défectueux</h3>
+                        </div>
+                        <span id="detail-badge" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">En cours</span>
+                    </div>
+
+                    <div class="mt-6 space-y-4">
+                        <div>
+                            <p class="text-xs font-medium text-slate-500">Localisation concernée</p>
+                            <p class="text-sm font-semibold text-slate-800 mt-0.5" id="detail-location">Chambre principale - 89 Rue Du Landy, Saint-Denis</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-medium text-slate-500">Description du problème</p>
+                            <p class="text-sm text-slate-700 mt-0.5 bg-slate-50 p-3 rounded-xl border border-slate-100" id="detail-desc">Le radiateur principal ne chauffe plus malgré la purge effectuée. Température descendue sous les 16°C dans la pièce de vie.</p>
+                        </div>
+
+                        <!-- Historique Chronologique -->
+                        <div class="pt-4 border-t border-slate-200">
+                            <h4 class="text-sm font-bold text-slate-900 mb-4">Historique des interventions</h4>
+                            <div class="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200" id="detail-timeline">
+                                <!-- Étape 1 -->
+                                <div class="relative">
+                                    <span class="absolute -left-6 top-1 w-3 h-3 bg-blue-600 rounded-full ring-4 ring-white"></span>
+                                    <p class="text-xs font-semibold text-slate-900">Diagnostic technique enregistré</p>
+                                    <p class="text-xs text-slate-500">28 Oct 2026, 09:42 • Par Wassila A.</p>
+                                </div>
+                                <!-- Étape 2 -->
+                                <div class="relative">
+                                    <span class="absolute -left-6 top-1 w-3 h-3 bg-amber-500 rounded-full ring-4 ring-white"></span>
+                                    <p class="text-xs font-semibold text-slate-900">Assigné au prestataire chauffage</p>
+                                    <p class="text-xs text-slate-500">28 Oct 2026, 14:15 • Service Technique</p>
+                                </div>
+                                <!-- Étape 3 -->
+                                <div class="relative">
+                                    <span class="absolute -left-6 top-1 w-3 h-3 bg-slate-300 rounded-full ring-4 ring-white"></span>
+                                    <p class="text-xs font-semibold text-slate-700">Visite planifiée du technicien</p>
+                                    <p class="text-xs text-slate-500">Prévue le 30 Oct 2026 entre 10h et 12h</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bouton d'export PDF en bas de panneau -->
+                <div class="mt-8 pt-4 border-t border-slate-200">
+                    <button onclick="exportCurrentTicketPDF()" class="w-full py-2.5 px-4 bg-slate-900 hover:bg-slate-800 text-white font-medium text-sm rounded-xl transition flex items-center justify-center space-x-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        <span id="export-btn-text">Télécharger le récépissé #TKT-001</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-white border-t border-slate-200 py-6 mt-12 text-center text-xs text-slate-500">
+        <p>Portail Locataire sécurisé • Conforme aux normes d'accessibilité WCAG AA • Développé pour la transparence et la défense des droits des locataires.</p>
+    </footer>
+
+    <!-- Modale Nouveau Signalement -->
+    <div id="ticket-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-xl border border-slate-200">
+            <div class="flex items-center justify-between pb-4 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-slate-900">Nouveau Signalement de Panne</h3>
+                <button onclick="closeNewTicketModal()" class="text-slate-400 hover:text-slate-600 p-1 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <form onsubmit="handleNewTicketSubmit(event)" class="mt-4 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase">Objet du problème</label>
+                    <input type="text" id="new-title" required class="mt-1 w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: Infiltration d'eau / VMC bruyante">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase">Localisation exacte</label>
+                    <input type="text" id="new-loc" required class="mt-1 w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" value="89 Rue Du Landy, Saint-Denis">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 uppercase">Description détaillée</label>
+                    <textarea id="new-desc" rows="3" required class="mt-1 w-full px-4 py-2 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Décrivez précisément les faits et l'historique..."></textarea>
+                </div>
+                <div class="pt-4 flex justify-end space-x-3">
+                    <button type="button" onclick="closeNewTicketModal()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium text-sm rounded-xl transition">Annuler</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-xl transition">Enregistrer le signalement</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modale de Message / Récépissé -->
+    <div id="message-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-xl border border-slate-200 text-center space-y-4">
+            <div id="modal-icon" class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-slate-900" id="modal-title">Récépissé généré</h3>
+                <p class="text-sm text-slate-600 mt-1" id="modal-text">Le document officiel horodaté a été créé avec succès pour votre dossier.</p>
+            </div>
+            <button onclick="closeMessageModal()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium text-sm rounded-xl transition">Fermer</button>
+        </div>
+    </div>
+
+    <!-- Logique JavaScript Interactive -->
+    <script>
+        // Données des tickets de maintenance
+        const ticketsData = {
+            'TKT-001': {
+                id: '#TKT-001',
+                title: 'Radiateur défectueux (Hall 89)',
+                location: 'Chambre principale - 89 Rue Du Landy, Saint-Denis',
+                date: '28 Oct 2026',
+                status: 'En cours',
+                statusClass: 'bg-amber-50 text-amber-700 border-amber-200',
+                desc: 'Le radiateur principal ne chauffe plus malgré la purge effectuée. Température descendue sous les 16°C dans la pièce de vie.',
+                timeline: [
+                    { title: 'Diagnostic technique enregistré', date: '28 Oct 2026, 09:42 • Par Wassila A.', color: 'bg-blue-600' },
+                    { title: 'Assigné au prestataire chauffage', date: '28 Oct 2026, 14:15 • Service Technique', color: 'bg-amber-500' },
+                    { title: 'Visite planifiée du technicien', date: 'Prévue le 30 Oct 2026 entre 10h et 12h', color: 'bg-slate-300' }
+                ]
+            },
+            'TKT-002': {
+                id: '#TKT-002',
+                title: "Problème d'éclairage cage d'escalier",
+                location: 'Palier 3ème étage - 89 Rue Du Landy',
+                date: '22 Oct 2026',
+                status: 'Planifié',
+                statusClass: 'bg-blue-50 text-blue-700 border-blue-200',
+                desc: "L'ampoule principale du palier clignote puis reste éteinte, zone dangereuse pour l'accès aux logements.",
+                timeline: [
+                    { title: 'Signalement transmis', date: '22 Oct 2026, 11:20 • Wassila A.', color: 'bg-blue-600' },
+                    { title: 'Intervention électricien planifiée', date: '25 Oct 2026 • En attente de pièces', color: 'bg-blue-500' }
+                ]
+            },
+            'TKT-003': {
+                id: '#TKT-003',
+                title: "Interphone / Contrôle d'accès défectueux",
+                location: 'Porte d’entrée principale - Bâtiment A',
+                date: '15 Sept 2026',
+                status: 'Terminé',
+                statusClass: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                desc: 'Le combiné d’interphone ne transmet plus l’appel vers l’appartement 89.',
+                timeline: [
+                    { title: 'Signalement initial', date: '15 Sept 2026', color: 'bg-blue-600' },
+                    { title: 'Remplacement de la platine d’interphonie', date: '20 Sept 2026 • Réparé', color: 'bg-emerald-500' }
+                ]
+            },
+            'TKT-004': {
+                id: '#TKT-004',
+                title: 'Fuite sur canalisation cave',
+                location: 'Sous-sol / Local technique',
+                date: '04 Avr 2026',
+                status: 'Terminé',
+                statusClass: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                desc: 'Légère fuite d’eau repérée près du compteur général de la colonne montante.',
+                timeline: [
+                    { title: 'Signalement urgent', date: '04 Avr 2026', color: 'bg-blue-600' },
+                    { title: 'Colmatage et vérification effectués', date: '05 Avr 2026 • Clos', color: 'bg-emerald-500' }
+                ]
+            }
+        };
+
+        let currentSelectedId = 'TKT-001';
+
+        // Sélectionner et afficher un ticket dans le panneau de détails
+        function selectTicket(ticketId) {
+            currentSelectedId = ticketId;
+            const t = ticketsData[ticketId];
+            if (!t) return;
+
+            document.getElementById('detail-id').innerText = t.id;
+            document.getElementById('detail-title').innerText = t.title;
+            document.getElementById('detail-location').innerText = t.location;
+            document.getElementById('detail-desc').innerText = t.desc;
+            
+            const badge = document.getElementById('detail-badge');
+            badge.className = `inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold ${t.statusClass}`;
+            badge.innerText = t.status;
+
+            document.getElementById('export-btn-text').innerText = `Télécharger le récépissé ${t.id}`;
+
+            // Remplir la timeline
+            const timelineEl = document.getElementById('detail-timeline');
+            timelineEl.innerHTML = '';
+            t.timeline.forEach(step => {
+                const div = document.createElement('div');
+                div.className = 'relative';
+                div.innerHTML = `
+                    <span class="absolute -left-6 top-1 w-3 h-3 ${step.color} rounded-full ring-4 ring-white"></span>
+                    <p class="text-xs font-semibold text-slate-900">${step.title}</p>
+                    <p class="text-xs text-slate-500">${step.date}</p>
+                `;
+                timelineEl.appendChild(div);
+            });
+        }
+
+        // Filtrer le tableau par statut
+        function filterTable(status) {
+            // Activer/désactiver les styles des boutons de filtre
+            ['all', 'en-cours', 'planifie', 'termine'].forEach(s => {
+                const btn = document.getElementById(`btn-${s}`);
+                if (s === status) {
+                    btn.className = 'px-3 py-1.5 rounded-lg bg-white text-slate-900 shadow-xs transition';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-lg text-slate-600 hover:text-slate-900 transition';
+                }
+            });
+
+            // Filtrer les lignes du tableau
+            const rows = document.querySelectorAll('#tickets-table-body tr');
+            rows.forEach(row => {
+                const statusCell = row.querySelector('[data-status]');
+                if (!statusCell) return;
+                const rowStatus = statusCell.getAttribute('data-status');
+                if (status === 'all' || rowStatus === status) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Gestion des modales
+        function openNewTicketModal() {
+            document.getElementById('ticket-modal').classList.remove('hidden');
+        }
+
+        function closeNewTicketModal() {
+            document.getElementById('ticket-modal').classList.add('hidden');
+        }
+
+        function handleNewTicketSubmit(event) {
+            event.preventDefault();
+            const title = document.getElementById('new-title').value;
+            const loc = document.getElementById('new-loc').value;
+            const desc = document.getElementById('new-desc').value;
+
+            // Générer un nouvel ID fictif
+            const newId = `#TKT-00${Object.keys(ticketsData).length + 1}`;
+            
+            ticketsData[newId.replace('#', '')] = {
+                id: newId,
+                title: title,
+                location: loc,
+                date: 'Aujourd’hui',
+                status: 'En cours',
+                statusClass: 'bg-amber-50 text-amber-700 border-amber-200',
+                desc: desc,
+                timeline: [
+                    { title: 'Signalement créé et horodaté', date: 'Aujourd’hui • Par Wassila A.', color: 'bg-blue-600' }
+                ]
+            };
+
+            // Ajouter dynamiquement au tableau HTML
+            const tbody = document.getElementById('tickets-table-body');
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-slate-50/80 cursor-pointer transition';
+            tr.onclick = () => selectTicket(newId.replace('#', ''));
+            tr.innerHTML = `
+                <td class="py-4 px-6 font-mono font-semibold text-blue-600">${newId}</td>
+                <td class="py-4 px-6 font-medium text-slate-900">${title}</td>
+                <td class="py-4 px-6 text-slate-500">Aujourd'hui</td>
+                <td class="py-4 px-6" data-status="en-cours">
+                    <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                        <span class="w-1.5 h-1.5 mr-1.5 bg-amber-500 rounded-full animate-pulse"></span> En cours
+                    </span>
+                </td>
+                <td class="py-4 px-6 text-right space-x-2">
+                    <button onclick="event.stopPropagation(); selectTicket('${newId.replace('#', '')}')" class="text-blue-600 hover:text-blue-800 font-medium text-xs bg-blue-50 px-3 py-1.5 rounded-lg">Détails</button>
+                    <button onclick="event.stopPropagation(); exportPDF('${newId.replace('#', '')}')" class="text-slate-600 hover:text-slate-900 font-medium text-xs bg-slate-100 px-3 py-1.5 rounded-lg">PDF</button>
+                </td>
+            `;
+            tbody.insertBefore(tr, tbody.firstChild);
+
+            closeNewTicketModal();
+            selectTicket(newId.replace('#', ''));
+            showNotification('Signalement enregistré', `Le ticket ${newId} a bien été créé et horodaté.`);
+        }
+
+        function exportPDF(ticketId) {
+            showNotification('Récépissé PDF généré', `Le document officiel pour le ticket #${ticketId} a été exporté avec succès.`);
+        }
+
+        function exportCurrentTicketPDF() {
+            exportPDF(currentSelectedId.replace('#', ''));
+        }
+
+        function showNotification(title, text) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            document.getElementById('message-modal').classList.remove('hidden');
+        }
+
+        function closeMessageModal() {
+            document.getElementById('message-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
